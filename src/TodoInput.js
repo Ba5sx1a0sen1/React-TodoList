@@ -3,14 +3,18 @@ export default class TodoInput extends React.Component{
     render(){
         return (
             <input type="text"
-                   defaultValue={this.props.content}
+                   value={this.props.content}
                    onKeyPress={this.submit}
+                   onChange={this.changeTitle}
                    />
         )
     }
-    submit(e){
+    submit=(e)=>{
         if(e.key==='Enter'){
-            console.log('按下回车')
+            this.props.onSubmit(e)
         }
+    }
+    changeTitle=(e)=>{
+        this.props.onChange(e)
     }
 }
