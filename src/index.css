@@ -1,5 +1,8 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background-color: #ddd;
+}
+#root2{
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
