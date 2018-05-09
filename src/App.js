@@ -34,11 +34,24 @@ class App extends Component {
   toggle=(e,todo)=>{
     todo.status= todo.status === 'completed'?'':'completed'
     this.setState(this.state)
+    console.log(this.state)
+  }
+
+  delete=(e,todo)=>{
+    todo.deleted = true
+    this.setState(this.state)
+    console.log(this.state)    
   }
 
   render() {
     let todos = this.state.todoList.map((value,index)=>{//Array Api (value,index)
-      return (<li key={index}><TodoItem todo={value} onToggle={this.toggle}/></li>)
+      return (
+      <li key={index}>
+        <TodoItem todo={value} 
+        onDelete={this.delete}
+        onToggle={this.toggle}/>
+      </li>
+      )
     })
     return (
       <div className="App">
