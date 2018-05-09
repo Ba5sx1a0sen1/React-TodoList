@@ -44,7 +44,9 @@ class App extends Component {
   }
 
   render() {
-    let todos = this.state.todoList.map((value,index)=>{//Array Api (value,index)
+    let todos = this.state.todoList
+      .filter((item)=>(item.deleted!==true))
+      .map((value,index)=>{//Array Api (value,index)
       return (
       <li key={index}>
         <TodoItem todo={value} 
