@@ -58,7 +58,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>
-          我的代办
+          我的待办
         </h1>
         <div className="inputWrapper">
           <TodoInput 
@@ -66,7 +66,7 @@ class App extends Component {
           onChange={this.changeTitle}
           content={this.state.newTodo}/>
         </div>
-        <ol>
+        <ol className="todoList">
           {todos}
         </ol>
       </div>
