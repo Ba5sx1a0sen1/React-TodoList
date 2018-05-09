@@ -1,5 +1,6 @@
 import React from "react"
 import "./UserDialog.css"
+import {signUp} from "./leancloud"
 export default class UserDialog extends React.Component {
     constructor(props) {
         super(props)
@@ -20,7 +21,15 @@ export default class UserDialog extends React.Component {
         })
     }
     signUp=(e)=>{
-
+        e.preventDefault()// 防止刷新
+        let {username,password} = this.state.formData
+        let success = (user)=>{
+            console.log(user)
+        }
+        let error = (error)=>{
+            console.log(error)
+        }
+        signUp(username,password,success,error)
     }
     signIn=(e)=>{
 
