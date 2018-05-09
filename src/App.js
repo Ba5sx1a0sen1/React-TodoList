@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import AV, { User } from "leancloud-storage"
 import "normalize.css"
 import './App.css';
 import './reset.css'
 import TodoInput from "./TodoInput"
 import TodoItem from "./ToduItem"
+import UserDialog from "./UserDialog"
 
 class App extends Component {
   constructor(props){
@@ -69,6 +71,7 @@ class App extends Component {
         <ol className="todoList">
           {todos}
         </ol>
+        <UserDialog/>
       </div>
     );
   }
