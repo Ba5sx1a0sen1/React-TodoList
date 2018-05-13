@@ -46,10 +46,11 @@ class App extends Component {
     console.log(this.state)    
   }
   onSignUp=(user)=>{
-    this.state.user = user
-    this.setState(this.state)
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.user = user
+    this.setState(stateCopy)
   }
-  
+
   render() {
     let todos = this.state.todoList
       .filter((item)=>(item.deleted!==true))
