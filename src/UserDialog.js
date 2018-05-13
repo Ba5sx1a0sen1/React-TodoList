@@ -1,6 +1,6 @@
 import React from "react"
 import "./UserDialog.css"
-import {signUp} from "./leancloud"
+import {signUp,signIn} from "./leancloud"
 export default class UserDialog extends React.Component {
     constructor(props) {
         super(props)
@@ -27,12 +27,20 @@ export default class UserDialog extends React.Component {
             this.props.onSignUp(user)
         }
         let error = (error)=>{
-            console.log(error)
+            alert(error)
         }
         signUp(username,password,success,error)
     }
     signIn=(e)=>{
-
+        e.preventDefault()
+        let {username,password} = this.state.formData
+        let success = (user)=>{
+            this.props.onSignIn(user)
+        }
+        let error = (error)=>{
+            alert(error)
+        }
+        signIn(username,password,success,error)    
     }
     changeUserName=(e)=>{
         let stateCopy = this.deepClone(this.state)
