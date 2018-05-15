@@ -7,6 +7,7 @@ export default class UserDialog extends React.Component {
         this.state = {
             selected: "signUp",
             formData:{
+                email:'',
                 username:'',
                 password:''
             }
@@ -22,7 +23,7 @@ export default class UserDialog extends React.Component {
     }
     signUp=(e)=>{
         e.preventDefault()// 防止刷新
-        let {username,password} = this.state.formData
+        let {username,password,email} = this.state.formData
         let success = (user)=>{
             this.props.onSignUp(user)
         }
@@ -36,7 +37,7 @@ export default class UserDialog extends React.Component {
                           break
                     }
         }
-        signUp(username,password,success,error)
+        signUp(email,username,password,success,error)
     }
     signIn=(e)=>{
         e.preventDefault()
@@ -69,9 +70,21 @@ export default class UserDialog extends React.Component {
         stateCopy.formData.password = e.target.value
         this.setState(stateCopy)
     }
+    changeEmail=(e)=>{
+        let stateCopy = this.deepClone(this.state)
+        stateCopy.formData.email = e.target.value
+        this.setState(stateCopy)
+    }
     render() {
         let signUpForm = (
             <form className="signUp" onSubmit={this.signUp}> {/* 注册*/}
+                <div className="row">
+                    <label htmlFor="">邮箱</label>
+                    <input type="text" name="" id=""
+                        value={this.state.formData.email}
+                        onChange={this.changeEmail}
+                    />
+                </div>
                 <div className="row">
                     <label>用户名</label>
                     <input type="text" 
