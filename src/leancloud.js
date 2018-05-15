@@ -39,7 +39,7 @@ export function sendPasswordResetEmail(email,successFn,errorFn){
   AV.User.requestPasswordReset(email).then(function(success){
     successFn()
   },function(error){
-    console.log(error)
+    errorFn(error)
   })
 }
 export function getCurrentUser(){

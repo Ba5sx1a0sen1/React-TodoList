@@ -85,6 +85,11 @@ export default class UserDialog extends React.Component {
         e.preventDefault()
         sendPasswordResetEmail(this.state.formData.email)
     }
+    returnToSignIn=(e)=>{
+        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        stateCopy.selectedTab = 'signInOrSignUp'
+        this.setState(stateCopy)
+    }
     render() {
         let signUpForm = (
             <form className="signUp" onSubmit={this.signUp}> {/* 注册*/}
@@ -171,6 +176,7 @@ export default class UserDialog extends React.Component {
                     </div>
                     <div className="row actions">
                         <button type="submit">发送重置邮件</button>
+                        <a href="#" onClick={this.returnToSignIn}>返回登录</a>
                     </div>
                 </form>
             </div>
