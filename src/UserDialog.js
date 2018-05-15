@@ -1,6 +1,6 @@
 import React from "react"
 import "./UserDialog.css"
-import { signUp, signIn } from "./leancloud"
+import { signUp, signIn, sendPasswordResetEmail } from "./leancloud"
 export default class UserDialog extends React.Component {
     constructor(props) {
         super(props)
@@ -81,8 +81,9 @@ export default class UserDialog extends React.Component {
         stateCopy.selectedTab = 'forgotPassword'
         this.setState(stateCopy)
     }
-    resetPassword = () => {
-
+    resetPassword = (e) => {
+        e.preventDefault()
+        sendPasswordResetEmail(this.state.formData.email)
     }
     render() {
         let signUpForm = (

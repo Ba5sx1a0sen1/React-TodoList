@@ -35,7 +35,13 @@ export function signOut(){
   AV.User.logOut()
   return undefined
 }
-
+export function sendPasswordResetEmail(email,successFn,errorFn){
+  AV.User.requestPasswordReset(email).then(function(success){
+    successFn()
+  },function(error){
+    console.log(error)
+  })
+}
 export function getCurrentUser(){
   let user = AV.User.current()
   if(user){
