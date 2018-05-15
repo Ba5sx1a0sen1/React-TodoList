@@ -6,7 +6,7 @@ import './reset.css'
 import TodoInput from "./TodoInput"
 import TodoItem from "./ToduItem"
 import UserDialog from "./UserDialog"
-import {getCurrentUser,signOut} from './leancloud'
+import {getCurrentUser,signOut,TodoModel} from './leancloud'
 
 class App extends Component {
   constructor(props){
@@ -18,15 +18,20 @@ class App extends Component {
     }
   }
   addTodo=(event)=>{
-    this.state.todoList.push({
-      id:idMaker(),
+    let newTodo={
       title:event.target.value,
       status:null,
       deleted:false,
-    })
-    this.setState({
-      newTodo: '',
-      todoList: this.state.todoList
+    }
+    TodoModel.create(newTodo,(id)=>{
+      newTodo.id = id
+      this.state.todo.push(newTodo)
+      this.setState({
+        newTodo:'',
+        todoList:this.state.todoList
+      })
+    },(error)=>{
+      console.log(error)
     })
   }
   changeTitle=(e)=>{
@@ -92,10 +97,4 @@ class App extends Component {
 }
 
 
-
-let id = 0
-function idMaker(){
-  id+=1
-  return id
-}
 export default App;
