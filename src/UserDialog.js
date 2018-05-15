@@ -29,11 +29,22 @@ export default class UserDialog extends React.Component {
     signUp = (e) => {
         e.preventDefault()// 防止刷新
         let { username, password, email } = this.state.formData
+        if(username.length<=3){
+            alert('用户名必须大于三个字符')
+            return false
+        }
+        if(password.length<6){
+            alert('密码必须不小于6个字符')
+            return false
+        }
         let success = (user) => {
             this.props.onSignUp(user)
         }
         let error = (error) => {
             switch (error.code) {
+                case 125:
+                    alert('邮箱格式不正确')
+                    break
                 case 202:
                     alert('用户名已被占用')
                     break
