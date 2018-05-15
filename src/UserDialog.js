@@ -76,12 +76,12 @@ export default class UserDialog extends React.Component {
         stateCopy.formData.email = e.target.value
         this.setState(stateCopy)
     }
-    showForgotPassword=()=>{
+    showForgotPassword = () => {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.selectedTab = 'forgotPassword'
         this.setState(stateCopy)
     }
-    resetPassword=()=>{
+    resetPassword = () => {
 
     }
     render() {
