@@ -29,11 +29,11 @@ export default class UserDialog extends React.Component {
     signUp = (e) => {
         e.preventDefault()// 防止刷新
         let { username, password, email } = this.state.formData
-        if(username.length<=3){
+        if (username.length <= 3) {
             alert('用户名必须大于三个字符')
             return false
         }
-        if(password.length<6){
+        if (password.length < 6) {
             alert('密码必须不小于6个字符')
             return false
         }
@@ -47,6 +47,9 @@ export default class UserDialog extends React.Component {
                     break
                 case 202:
                     alert('用户名已被占用')
+                    break
+                case 203:
+                    alert('该邮箱地址已被占用')
                     break
                 default:
                     alert(error)
@@ -131,13 +134,13 @@ export default class UserDialog extends React.Component {
             <div className="UserDialog-Wrapper">
                 <div className="UserDialog">
                     {this.state.selectedTab === 'signInOrSignUp' ?
-                        signInOrSignUp : 
+                        signInOrSignUp :
                         <ForgotPasswordForm
                             formData={this.state.formData}
                             onSubmit={this.resetPassword.bind(this)}
                             onChange={this.changeFormData.bind(this)}
                             onSignIn={this.returnToSignIn.bind(this)}
-                        />                
+                        />
                     }
                 </div>
             </div>
