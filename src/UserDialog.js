@@ -3,6 +3,7 @@ import "./UserDialog.css"
 import { signUp, signIn, sendPasswordResetEmail } from "./leancloud"
 import SignUpForm from "./SignUpForm"
 import SignInForm from "./SignInForm"
+import ForgotPasswordForm from "./ForgotPasswordForm"
 
 export default class UserDialog extends React.Component {
     constructor(props) {
@@ -64,7 +65,7 @@ export default class UserDialog extends React.Component {
         }
         signIn(username, password, success, error)
     }
-    changeFormData=(key, e)=>{
+    changeFormData = (key, e) => {
         let stateCopy = JSON.parse(JSON.stringify(this.state))  // 用 JSON 深拷贝
         stateCopy.formData[key] = e.target.value
         this.setState(stateCopy)
@@ -78,7 +79,7 @@ export default class UserDialog extends React.Component {
         e.preventDefault()
         sendPasswordResetEmail(this.state.formData.email)
     }
-    returnToSignIn=(e)=>{
+    returnToSignIn = (e) => {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.selectedTab = 'signInOrSignUp'
         this.setState(stateCopy)
@@ -99,44 +100,34 @@ export default class UserDialog extends React.Component {
                         /> 登录</label>
                 </nav>
                 <div className="panes">
-                    {this.state.selected === 'signUp' ? 
-                    <SignUpForm formData={this.state.formData}
-                        onSubmit={this.signUp}
-                        onChange={this.changeFormData}/>
-                    : null}
-                    {this.state.selected === 'signIn' ? 
-                    <SignInForm
-                        formData={this.state.formData}
-                        onChange={this.changeFormData.bind(this)}
-                        onSubmit={this.signIn.bind(this)}
-                        onForgotPassword={this.showForgotPassword.bind(this)}
-                    />
-                    : null}
+                    {this.state.selected === 'signUp' ?
+                        <SignUpForm formData={this.state.formData}
+                            onSubmit={this.signUp}
+                            onChange={this.changeFormData} />
+                        : null}
+                    {this.state.selected === 'signIn' ?
+                        <SignInForm
+                            formData={this.state.formData}
+                            onChange={this.changeFormData.bind(this)}
+                            onSubmit={this.signIn.bind(this)}
+                            onForgotPassword={this.showForgotPassword.bind(this)}
+                        />
+                        : null}
                 </div>
-            </div>
-        )
-        let forgotPassword = (
-            <div className="forgotPassword">
-                <h3>
-                    重置密码
-              </h3>
-                <form className="forgotPassword" onSubmit={this.resetPassword.bind(this)}> {/* 登录*/}
-                    <div className="row">
-                        <label>邮箱</label>
-                        <input type="text" value={this.state.formData.email}
-                            onChange={this.changeFormData.bind(this,'email')} />
-                    </div>
-                    <div className="row actions">
-                        <button type="submit">发送重置邮件</button>
-                        <a href="#" onClick={this.returnToSignIn}>返回登录</a>
-                    </div>
-                </form>
             </div>
         )
         return (
             <div className="UserDialog-Wrapper">
                 <div className="UserDialog">
-                    {this.state.selectedTab === 'signInOrSignUp' ? signInOrSignUp : forgotPassword}
+                    {this.state.selectedTab === 'signInOrSignUp' ?
+                        signInOrSignUp : 
+                        <ForgotPasswordForm
+                            formData={this.state.formData}
+                            onSubmit={this.resetPassword.bind(this)}
+                            onChange={this.changeFormData.bind(this)}
+                            onSignIn={this.returnToSignIn.bind(this)}
+                        />                
+                    }
                 </div>
             </div>
         )
