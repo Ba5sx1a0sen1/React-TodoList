@@ -26,6 +26,7 @@ class App extends Component {
     }
   }
   addTodo=(event)=>{
+    console.log('调用了')
     let newTodo={
       title:event.target.value,
       status:null,
@@ -33,7 +34,7 @@ class App extends Component {
     }
     TodoModel.create(newTodo,(id)=>{
       newTodo.id = id
-      this.state.todo.push(newTodo)
+      this.state.todoList.push(newTodo)
       this.setState({
         newTodo:'',
         todoList:this.state.todoList
